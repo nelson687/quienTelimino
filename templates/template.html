@@ -1,0 +1,91 @@
+<html>
+<head>
+	<title>Prueba Face</title>
+	<link type="text/css" rel="stylesheet" href="/styles/styles.css"/>
+</head>
+
+<body>
+<div id="prueba">
+    {% if autorizado %}   
+    
+   <br>
+   <br>
+   <h4>Los contactos que has agregado o los contactos que te han eliminado se mostrar&aacuten a partir de la segunda vez que se acceda a la aplicaci&oacuten.</h4>
+   <p><h5>Cantidad de contactos al <u>{{current_user.actualizado|date:"d-m-Y"}}</u>: <font color="red"> {{contactosAntes}} </font></h5></p>
+   <p><h5>N&uacutemero de contactos actual: <font color="red">{{contactosActual}}</font></h5></p>
+   <br>
+  
+     <div id="tabla1">
+      <table align="left">
+        <thead>
+         <tr>
+          <th>Te han eliminado</th>
+         </tr>
+        </thead>
+        <tbody>
+         {% if bandElim %}   
+      	   <tr>
+     	     <td>---</td>
+           </tr>
+
+         {% else %} 
+     	   {% for item in eliminadores.items %} 
+     	       <tr> 
+     		  <td> <A HREF="http://www.facebook.com/profile.php?id={{item.0}}" TITLE="Ir al perfil" TARGET="_new">{{item.1}}</A></>
+     	       </tr> 
+     	   {% endfor %} 
+         {% endif %}
+        </tbody>
+      </table>
+     </div> 
+
+     <div id="tabla2">
+      <table>
+        <thead>
+         <tr>
+          <th>Has agregado</th>
+         </tr>
+        </thead>
+        <tbody>
+         {% if bandAgr %}
+			{% for item in agregados.items %} 
+     	       <tr> 
+     		  <td> <A HREF="http://www.facebook.com/profile.php?id={{item.0}}" TITLE="Ir al perfil" TARGET="_new">{{item.1}}</A></>
+     	       </tr> 
+     	   {% endfor %} 
+     	 {% else %}
+     	   <tr>
+     	     <td>---</td>
+           </tr>
+         {% endif %}
+        </tbody>
+      </table>
+ </div> 
+
+<div id="tabla3">
+	<table>
+	<thead>
+         <tr>
+          <th>Te han eliminado Historial</th>
+         </tr>
+        </thead>	
+	<tbody>
+		  {% for item in current_user.historico.items %} 
+     	       <tr> 
+     		  <td> <A HREF="http://www.facebook.com/profile.php?id={{item.0}}" TITLE="Ir al perfil" TARGET="_new">{{item.1}}</A></>
+     	       </tr> 
+     	   {% endfor %} 
+	</tbody>
+	</table>
+
+</div>
+
+
+
+	{% else %}
+	 	<script> top.location.href='https://www.facebook.com/dialog/oauth?client_id={{facebook_app_id}}&redirect_uri=https://apps.facebook.com/qtelimino/'</script>"
+	 {% endif %}  
+
+</div>
+</body>
+</html>

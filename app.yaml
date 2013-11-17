@@ -1,0 +1,14 @@
+application: nelsong687
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+
+- url: /styles
+  static_dir: styles
+  secure: optional
+
+- url: /.*
+  script: quienTelimino.app
